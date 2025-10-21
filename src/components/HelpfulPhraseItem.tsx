@@ -1,4 +1,3 @@
-import type { AudioState } from '@/hooks/useAudioPlayer';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { Loader2Icon, PauseIcon, PlayIcon } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
@@ -63,7 +62,7 @@ export default function HelpfulPhraseItem({
 }
 
 const RenderToggleButton = () => {
-  const [state, setState] = useState<AudioState>('paused');
+  const [state, setState] = useState<any>('paused');
 
   const play = useCallback(() => {
     setState('playing');
