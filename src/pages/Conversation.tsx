@@ -1,3 +1,5 @@
+import * as Popover from '@radix-ui/react-popover';
+import { MicIcon, StopCircleIcon } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Message {
@@ -19,6 +21,7 @@ export default function Conversation() {
     },
   ]);
   const [showHint, setShowHint] = useState(false);
+  const [hintAvailable, setHintAvailable] = useState(false);
   const [audioLevel, setAudioLevel] = useState(0);
   const [waveformData, setWaveformData] = useState<number[]>(new Array(5).fill(0));
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -26,6 +29,7 @@ export default function Conversation() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const animationFrameRef = useRef<number | null>(null);
+  const hintTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -171,10 +175,32 @@ export default function Conversation() {
     }
   }, [isAISpeaking]);
 
+  const startHintTimer = () => {
+    // Clear existing timer
+    if (hintTimerRef.current) {
+      clearTimeout(hintTimerRef.current);
+    }
+
+    // Start new timer for 5 seconds
+    hintTimerRef.current = setTimeout(() => {
+      setHintAvailable(true);
+    }, 5000);
+  };
+
+  const clearHintTimer = () => {
+    if (hintTimerRef.current) {
+      clearTimeout(hintTimerRef.current);
+      hintTimerRef.current = null;
+    }
+    setShowHint(false);
+    setHintAvailable(false);
+  };
+
   const handleMicrophoneToggle = () => {
     if (!isListening) {
       // Start listening
       setIsListening(true);
+      clearHintTimer(); // Clear hint timer when user starts speaking
       setTimeout(() => {
         setIsListening(false);
         setIsAISpeaking(true);
@@ -190,6 +216,7 @@ export default function Conversation() {
             },
           ]);
           setIsAISpeaking(false);
+          startHintTimer(); // Start hint timer after AI finishes speaking
         }, 2000);
       }, 3000);
     } else {
@@ -199,9 +226,20 @@ export default function Conversation() {
   };
 
   const handleExit = () => {
+    // Clear hint timer when exiting
+    clearHintTimer();
     // Navigate back or close conversation
     window.history.back();
   };
+
+  // Cleanup timer on component unmount
+  useEffect(() => {
+    return () => {
+      if (hintTimerRef.current) {
+        clearTimeout(hintTimerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className='fixed inset-0 bg-background flex flex-col min-h-svh pb-(--bottom-nav-height)'>
@@ -302,29 +340,107 @@ export default function Conversation() {
             aria-label={isListening ? 'Stop listening' : 'Start listening'}
           >
             {isListening ? (
-              <svg width='24' height='24' viewBox='0 0 24 24' fill='currentColor'>
-                <rect x='6' y='6' width='12' height='12' rx='2' />
-              </svg>
+              <StopCircleIcon className='w-6 h-6 text-white' />
             ) : (
-              <svg width='24' height='24' viewBox='0 0 24 24' fill='currentColor'>
-                <path d='M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z' />
-                <path d='M19 10v2a7 7 0 0 1-14 0v-2' />
-                <line x1='12' y1='19' x2='12' y2='23' />
-                <line x1='8' y1='23' x2='16' y2='23' />
-              </svg>
+              <MicIcon className='w-6 h-6 text-white' />
             )}
           </button>
         </div>
 
-        {/* Hint Button */}
-        {showHint && (
-          <div className='flex justify-end pt-4'>
-            <button
-              onClick={() => setShowHint(false)}
-              className='text-xs text-muted-foreground hover:text-foreground transition-colors'
-            >
-              [? Hint]
-            </button>
+        {/* Hint Popover */}
+        {hintAvailable && (
+          <div className='pt-4 flex justify-end'>
+            <Popover.Root open={showHint} onOpenChange={setShowHint}>
+              <Popover.Trigger asChild>
+                <button className='group relative inline-flex items-center gap-2 px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-all duration-200 hover:bg-muted/50 rounded-md border border-transparent hover:border-border/50'>
+                  <svg
+                    className={`w-3 h-3 transition-transform duration-200 ${showHint ? 'rotate-180' : ''}`}
+                    fill='none'
+                    stroke='currentColor'
+                    viewBox='0 0 24 24'
+                  >
+                    <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+                  </svg>
+                  <span>💡 Conversation examples</span>
+                </button>
+              </Popover.Trigger>
+
+              <Popover.Portal>
+                <Popover.Content
+                  className='z-50 w-80 p-4 bg-background/95 backdrop-blur-sm rounded-xl border border-border/50 shadow-lg animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2'
+                  side='top'
+                  align='end'
+                  sideOffset={8}
+                >
+                  <div className='space-y-3'>
+                    <div className='flex items-center gap-2 mb-4'>
+                      <div className='w-2 h-2 bg-primary rounded-full animate-pulse'></div>
+                      <p className='text-sm font-semibold text-foreground'>What can you say?</p>
+                    </div>
+
+                    <div className='grid gap-2'>
+                      {/* Sipariş örneği */}
+                      <div className='group p-3 bg-muted/30 rounded-lg border border-primary/20 hover:border-primary/40 transition-all duration-200 hover:shadow-sm'>
+                        <div className='flex items-start gap-3'>
+                          <div className='w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center shrink-0 mt-0.5'>
+                            <span className='text-xs font-bold text-primary'>1</span>
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <p className='text-xs font-medium text-muted-foreground mb-1'>To place an order</p>
+                            <p className='text-sm text-foreground font-medium'>"I'd like to order a pizza"</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Menü sorma örneği */}
+                      <div className='group p-3 bg-muted/30 rounded-lg border border-green-500/20 hover:border-green-500/40 transition-all duration-200 hover:shadow-sm'>
+                        <div className='flex items-start gap-3'>
+                          <div className='w-6 h-6 bg-green-500/10 rounded-full flex items-center justify-center shrink-0 mt-0.5'>
+                            <span className='text-xs font-bold text-green-600'>2</span>
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <p className='text-xs font-medium text-muted-foreground mb-1'>To ask about the menu</p>
+                            <p className='text-sm text-foreground font-medium'>"What's on the menu today?"</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Fiyat sorma örneği */}
+                      <div className='group p-3 bg-muted/30 rounded-lg border border-blue-500/20 hover:border-blue-500/40 transition-all duration-200 hover:shadow-sm'>
+                        <div className='flex items-start gap-3'>
+                          <div className='w-6 h-6 bg-blue-500/10 rounded-full flex items-center justify-center shrink-0 mt-0.5'>
+                            <span className='text-xs font-bold text-blue-600'>3</span>
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <p className='text-xs font-medium text-muted-foreground mb-1'>To ask about prices</p>
+                            <p className='text-sm text-foreground font-medium'>"What are the pizza prices?"</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Yardım isteme örneği */}
+                      <div className='group p-3 bg-muted/30 rounded-lg border border-orange-500/20 hover:border-orange-500/40 transition-all duration-200 hover:shadow-sm'>
+                        <div className='flex items-start gap-3'>
+                          <div className='w-6 h-6 bg-orange-500/10 rounded-full flex items-center justify-center shrink-0 mt-0.5'>
+                            <span className='text-xs font-bold text-orange-600'>4</span>
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <p className='text-xs font-medium text-muted-foreground mb-1'>To ask for recommendations</p>
+                            <p className='text-sm text-foreground font-medium'>"What would you recommend?"</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='pt-2 border-t border-border/30'>
+                      <p className='text-xs text-muted-foreground text-center'>💡 Hints</p>
+                    </div>
+                  </div>
+
+                  <Popover.Arrow className='fill-background/95' />
+                </Popover.Content>
+              </Popover.Portal>
+            </Popover.Root>
           </div>
         )}
       </div>
