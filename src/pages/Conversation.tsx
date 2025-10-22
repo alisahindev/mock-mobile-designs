@@ -1,6 +1,7 @@
 import * as Popover from '@radix-ui/react-popover';
-import { MicIcon, StopCircleIcon } from 'lucide-react';
+import { ArrowRight, MicIcon, StopCircleIcon } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Message {
   id: string;
@@ -10,6 +11,7 @@ interface Message {
 }
 
 export default function Conversation() {
+  const navigate = useNavigate();
   const [isListening, setIsListening] = useState(false);
   const [isAISpeaking, setIsAISpeaking] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -232,6 +234,10 @@ export default function Conversation() {
     window.history.back();
   };
 
+  const handleSuccess = () => {
+    navigate('/success');
+  };
+
   // Cleanup timer on component unmount
   useEffect(() => {
     return () => {
@@ -347,6 +353,17 @@ export default function Conversation() {
           </button>
         </div>
 
+        {/* Success Button */}
+        <div className='flex justify-center items-center pt-4'>
+          <button
+            onClick={handleSuccess}
+            className='inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl'
+          >
+            <span>Complete Conversation</span>
+            <ArrowRight className='w-4 h-4' />
+          </button>
+        </div>
+
         {/* Hint Popover */}
         {hintAvailable && (
           <div className='pt-4 flex justify-end'>
@@ -361,7 +378,7 @@ export default function Conversation() {
                   >
                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
                   </svg>
-                  <span>💡 Conversation examples</span>
+                  <span>💡 Hints</span>
                 </button>
               </Popover.Trigger>
 
@@ -433,7 +450,9 @@ export default function Conversation() {
                     </div>
 
                     <div className='pt-2 border-t border-border/30'>
-                      <p className='text-xs text-muted-foreground text-center'>💡 Hints</p>
+                      <p className='text-xs text-muted-foreground text-center'>
+                        💡 You can start the conversation by saying one of these examples
+                      </p>
                     </div>
                   </div>
 

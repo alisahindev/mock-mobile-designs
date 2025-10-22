@@ -12,6 +12,7 @@ import Feedback from './pages/Feedback';
 import Home from './pages/Home';
 import Progress from './pages/Progress';
 import Replay from './pages/Replay';
+import Success from './pages/Success';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'feedback', element: <Feedback /> },
       { path: 'replay', element: <Replay /> },
       { path: 'add-project', element: <AddProject /> },
+      { path: 'success', element: <Success /> },
     ],
   },
 ]);

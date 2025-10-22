@@ -13,7 +13,7 @@ export default function Completed() {
 
   return (
     <div>
-      <Header userName='Livia Vaccaro' avatarUrl='https://avatars.githubusercontent.com/u/123456789?v=4' />
+      <Header userName='Livia Vaccaro' avatarUrl='https://avatar.iran.liara.run/public/41' />
 
       {/* Completed Assignments Section */}
       <section className='px-6' aria-labelledby='completed-title'>

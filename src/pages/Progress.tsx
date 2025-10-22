@@ -7,7 +7,7 @@ export default function Progress() {
 
   return (
     <>
-      <Header userName='Ali' />
+      <Header userName='Livia Vaccaro' avatarUrl='https://avatar.iran.liara.run/public/41' />
       <section className='px-6 space-y-4' aria-labelledby='progress-title'>
         <h1 id='progress-title' className='text-xl font-semibold mb-6'>
           Progress

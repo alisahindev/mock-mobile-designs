@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header userName='Livia Vaccaro' avatarUrl='https://avatars.githubusercontent.com/u/123456789?v=4' />
+      <Header userName='Livia Vaccaro' avatarUrl='https://avatar.iran.liara.run/public/41' />
 
       {/* Today's Assignments Section */}
       <section className='px-6 mb-6' aria-labelledby='assignments-title'>
