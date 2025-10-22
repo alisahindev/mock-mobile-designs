@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../components/ui/Accordion';
+import Badge from '../components/ui/Badge';
 import { getAssignmentById } from '../data/assignments';
 
 export default function AssignmentDetail() {
@@ -73,20 +74,13 @@ export default function AssignmentDetail() {
   }
 
   const handleStartConversation = () => {
-    // Navigate to conversation page with assignment context
-    navigate('/conversation', { state: { assignmentId: assignment.id } });
-  };
-
-  const getCategoryBadgeColor = () => {
-    const colors: Record<string, string> = {
-      'Cafe Order': 'bg-orange-100 text-orange-600',
-      'Doctor Visit': 'bg-blue-100 text-blue-600',
-      Shopping: 'bg-pink-100 text-pink-600',
-      Restaurant: 'bg-green-100 text-green-600',
-      'Hotel Check-in': 'bg-purple-100 text-purple-600',
-      'Job Interview': 'bg-cyan-100 text-cyan-600',
-    };
-    return colors[assignment.category] || 'bg-purple-100 text-purple-600';
+    if (assignment.status === 'completed') {
+      // Navigate to replay page for completed assignments
+      navigate('/replay', { state: { assignmentId: assignment.id } });
+    } else {
+      // Navigate to conversation page with assignment context
+      navigate('/conversation', { state: { assignmentId: assignment.id } });
+    }
   };
 
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -101,7 +95,7 @@ export default function AssignmentDetail() {
   return (
     <div className='min-h-screen relative'>
       {/* Hero Background Image */}
-      <div className='fixed inset-0 z-0 h-[60vh]'>
+      <div className='fixed inset-0 z-0 h-[40vh]'>
         {!imageLoaded && (
           <div className='absolute inset-0 bg-linear-to-br from-gray-200 via-gray-100 to-gray-200 animate-pulse'>
             <div className='absolute inset-0 bg-linear-to-br from-blue-500/10 to-blue-500/10 animate-pulse' />
@@ -168,7 +162,7 @@ export default function AssignmentDetail() {
       </header>
 
       {/* Content Section */}
-      <div className='relative z-10 mt-[50vh]'>
+      <div className='relative z-10 mt-[30vh]'>
         <div className='bg-white rounded-t-3xl shadow-2xl border-t border-gray-200/30 backdrop-blur-sm'>
           {/* Title Section */}
           <section className='px-6 pt-8 pb-6' aria-labelledby='assignment-title'>
@@ -202,17 +196,15 @@ export default function AssignmentDetail() {
 
             <div className='flex items-center gap-3'>
               {/* Category Badge */}
-              <span
-                className={`inline-flex items-center px-4 py-2.5 rounded-2xl text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 ${getCategoryBadgeColor()}`}
-              >
+              <Badge variant='secondary' size='sm'>
                 {assignment.category}
-              </span>
+              </Badge>
 
               {/* Duration Badge */}
-              <div className='flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-purple-100 text-purple-600 text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200'>
+              <Badge variant='default' size='sm' className='flex items-center gap-2'>
                 <Clock className='w-4 h-4 shrink-0' aria-hidden='true' />
                 <span>{assignment.duration} dakika</span>
-              </div>
+              </Badge>
             </div>
           </section>
 
@@ -317,12 +309,22 @@ export default function AssignmentDetail() {
               ? 'bg-linear-to-r from-green-500 via-green-600 to-green-500 hover:from-green-600 hover:via-green-700 hover:to-green-600 focus:ring-green-500/30'
               : 'bg-linear-to-r from-blue-600 via-purple-600 to-blue-600 hover:from-purple-600 hover:via-blue-600 hover:to-purple-600 focus:ring-blue-500/30',
           )}
-          aria-label={assignment.status === 'in_progress' ? 'Konuşmaya devam et' : 'Konuşmayı başlat'}
+          aria-label={
+            assignment.status === 'completed'
+              ? 'Konuşmayı tekrar izle'
+              : assignment.status === 'in_progress'
+              ? 'Konuşmaya devam et'
+              : 'Konuşmayı başlat'
+          }
         >
           {/* Shimmer Effect */}
           <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-1000' />
           <span className='relative z-10 flex items-center justify-center gap-2'>
-            {assignment.status === 'in_progress' ? 'Devam Et' : 'Başla'}
+            {assignment.status === 'completed'
+              ? 'Tekrar İzle'
+              : assignment.status === 'in_progress'
+              ? 'Devam Et'
+              : 'Başla'}
             <div className='w-2 h-2 bg-white/80 rounded-full animate-pulse' />
           </span>
         </button>

@@ -7,9 +7,29 @@ export const mockAssignments: Assignment[] = [
     category: 'Cafe Order',
     duration: 8,
     learningObjective: 'Practice ordering food and drinks in English',
-    status: 'not_started',
+    status: 'completed',
     imageUrl: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=450&fit=crop',
     dueDate: '2024-01-15',
+    socialProof: {
+      userAvatars: [
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+      ],
+      completedCount: 18,
+      totalClassSize: 25,
+      completionRate: 72, // ≥70% threshold met
+      rating: 4.8,
+      shouldShow: true, // Only show when ≥70% completion rate
+      message: 'Sınıf arkadaşlarının çoğu bu alıştırmayı tamamladı!', // Positive, non-comparative
+      recentComment: {
+        userName: 'Sarah M.',
+        userAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+        comment: 'Çok faydalı! Artık kafede rahatça sipariş verebiliyorum.',
+      },
+    },
     detail: {
       setting:
         "You're at a cozy neighborhood cafe. It's a Saturday morning, and you want to order a coffee and maybe a snack. The barista is friendly and ready to help you.",
@@ -66,6 +86,25 @@ export const mockAssignments: Assignment[] = [
     status: 'in_progress',
     imageUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=450&fit=crop',
     dueDate: '2024-01-12',
+    socialProof: {
+      userAvatars: [
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+      ],
+      completedCount: 20,
+      totalClassSize: 25,
+      completionRate: 52, // ≥70% threshold met
+      rating: 4.9,
+      shouldShow: true,
+      message: 'Sınıf arkadaşlarının çoğu bu alıştırmayı tamamladı!',
+      recentComment: {
+        userName: 'Ahmet K.',
+        userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        comment: 'Doktor randevusu almak artık çok kolay!',
+      },
+    },
     detail: {
       setting:
         "You need to see a doctor because you haven't been feeling well. You're calling the clinic to make an appointment.",
@@ -119,9 +158,30 @@ export const mockAssignments: Assignment[] = [
     category: 'Shopping',
     duration: 9,
     learningObjective: 'Practice asking for sizes, colors, and trying on clothes',
-    status: 'not_started',
+    status: 'completed',
     imageUrl: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=450&fit=crop',
     dueDate: '2024-01-18',
+    socialProof: {
+      userAvatars: [
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+      ],
+      completedCount: 19,
+      totalClassSize: 25,
+      completionRate: 25, // ≥70% threshold met
+      rating: 4.7,
+      shouldShow: true,
+      message: 'Sınıf arkadaşlarının çoğu bu alıştırmayı tamamladı!',
+      recentComment: {
+        userName: 'Zeynep A.',
+        userAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=32&h=32&fit=crop&crop=face',
+        comment: 'Alışveriş yaparken artık kendimi çok daha rahat hissediyorum.',
+      },
+    },
     detail: {
       setting:
         "You're at a clothing store looking for a new jacket. You want to find the right size and color, and you'd like to try it on before buying.",
@@ -218,6 +278,245 @@ export const mockAssignments: Assignment[] = [
         {
           id: 'phrase-20',
           text: 'May I have the check, please?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+      ],
+    },
+  },
+  {
+    id: 'hotel-checkin-1',
+    title: 'Hotel Check-in Process',
+    category: 'Hotel Check-in',
+    duration: 6,
+    learningObjective: 'Practice hotel check-in procedures and room requests',
+    status: 'completed',
+    imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=450&fit=crop',
+    dueDate: '2024-01-20',
+    socialProof: {
+      userAvatars: [
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=32&h=32&fit=crop&crop=face',
+      ],
+      completedCount: 8,
+      totalClassSize: 25,
+      completionRate: 32, // <70% threshold - should not show
+      rating: 4.5,
+      shouldShow: false, // Do not show when completion rate is low
+      message: 'Sınıf arkadaşlarının çoğu bu alıştırmayı tamamladı!',
+      recentComment: {
+        userName: 'Mehmet Y.',
+        userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face',
+        comment: 'Otel check-in süreci çok pratik!',
+      },
+    },
+    detail: {
+      setting:
+        "You've just arrived at a hotel for a business trip. You need to check in and get your room key. The hotel receptionist is ready to help you.",
+      studentRole: {
+        name: 'Guest',
+        description: 'You are a hotel guest checking in for your stay.',
+        goals: [
+          'Provide your reservation information',
+          'Ask about hotel amenities',
+          'Request room preferences',
+          'Get directions to your room',
+        ],
+      },
+      aiRole: {
+        name: 'Receptionist',
+        description: 'I am the hotel receptionist. I will help you check in and answer any questions about your stay.',
+      },
+      helpfulPhrases: [
+        {
+          id: 'phrase-21',
+          text: 'Hi, I have a reservation under the name Smith.',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-22',
+          text: 'Do you have a room with a city view?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-23',
+          text: 'What time is breakfast served?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-24',
+          text: 'Is there free WiFi in the rooms?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-25',
+          text: 'Could you help me with my luggage?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+      ],
+    },
+  },
+  {
+    id: 'job-interview-1',
+    title: 'Job Interview Preparation',
+    category: 'Job Interview',
+    duration: 10,
+    learningObjective: 'Practice common interview questions and professional communication',
+    status: 'in_progress',
+    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=450&fit=crop',
+    dueDate: '2024-01-25',
+    detail: {
+      setting:
+        "You're in a job interview for a marketing position. The interviewer is asking you questions about your experience and skills. You need to present yourself professionally.",
+      studentRole: {
+        name: 'Job Candidate',
+        description: 'You are a job candidate being interviewed for a marketing position.',
+        goals: [
+          'Introduce yourself professionally',
+          'Answer questions about your experience',
+          'Ask questions about the company',
+          'Express interest in the position',
+        ],
+      },
+      aiRole: {
+        name: 'Interviewer',
+        description:
+          'I am the hiring manager conducting your interview. I will ask you questions about your background and experience.',
+      },
+      helpfulPhrases: [
+        {
+          id: 'phrase-26',
+          text: "Thank you for having me. I'm excited to learn more about this opportunity.",
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-27',
+          text: 'I have three years of experience in digital marketing.',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-28',
+          text: 'What does a typical day look like in this role?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-29',
+          text: 'I am passionate about creating engaging content for social media.',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-30',
+          text: 'When can I expect to hear back about the next steps?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+      ],
+    },
+  },
+  {
+    id: 'cafe-order-2',
+    title: 'Ordering Breakfast at a Cafe',
+    category: 'Cafe Order',
+    duration: 7,
+    learningObjective: 'Practice ordering breakfast items and dietary preferences',
+    status: 'completed',
+    imageUrl: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&h=450&fit=crop',
+    dueDate: '2024-01-22',
+    detail: {
+      setting:
+        "You're at a breakfast cafe on a Sunday morning. You want to order a healthy breakfast and have some dietary restrictions. The server is ready to take your order.",
+      studentRole: {
+        name: 'Customer',
+        description: 'You are ordering breakfast at a cafe with specific dietary needs.',
+        goals: [
+          'Order a healthy breakfast',
+          'Ask about dietary options',
+          'Request modifications to menu items',
+          'Order a drink to go with your meal',
+        ],
+      },
+      aiRole: {
+        name: 'Server',
+        description:
+          'I am your server at the breakfast cafe. I will help you with the menu and accommodate your dietary needs.',
+      },
+      helpfulPhrases: [
+        {
+          id: 'phrase-31',
+          text: "Good morning! I'd like to see the breakfast menu, please.",
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-32',
+          text: 'Do you have any gluten-free options?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-33',
+          text: 'Can I have the avocado toast without the bread?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-34',
+          text: 'What fresh juices do you have available?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-35',
+          text: 'Is the coffee locally roasted?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+      ],
+    },
+  },
+  {
+    id: 'doctor-visit-2',
+    title: 'Follow-up Doctor Visit',
+    category: 'Doctor Visit',
+    duration: 8,
+    learningObjective: 'Practice discussing test results and treatment plans with a doctor',
+    status: 'completed',
+    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1b?w=800&h=450&fit=crop',
+    dueDate: '2024-01-08',
+    detail: {
+      setting:
+        "You're back at the doctor's office for a follow-up visit. The doctor has your test results and wants to discuss your treatment plan. You need to understand the medical information and ask questions.",
+      studentRole: {
+        name: 'Patient',
+        description: 'You are a patient discussing test results and treatment options with your doctor.',
+        goals: [
+          'Understand your test results',
+          'Ask questions about your treatment',
+          'Discuss medication side effects',
+          'Schedule follow-up appointments',
+        ],
+      },
+      aiRole: {
+        name: 'Doctor',
+        description: 'I am your doctor. I will explain your test results and discuss your treatment plan with you.',
+      },
+      helpfulPhrases: [
+        {
+          id: 'phrase-36',
+          text: 'Can you explain what these test results mean?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-37',
+          text: 'Are there any side effects I should watch for?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-38',
+          text: 'How long will I need to take this medication?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-39',
+          text: 'Should I make any changes to my diet?',
+          audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
+        },
+        {
+          id: 'phrase-40',
+          text: 'When should I come back for another check-up?',
           audioUrl: 'https://freesound.org/data/previews/316/316847_5123451-lq.mp3',
         },
       ],

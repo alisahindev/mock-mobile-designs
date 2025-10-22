@@ -28,6 +28,21 @@ export interface AssignmentDetail {
   helpfulPhrases: HelpfulPhrase[];
 }
 
+export interface SocialProof {
+  userAvatars: string[];
+  completedCount: number;
+  totalClassSize: number;
+  completionRate: number; // 0-100 percentage
+  rating: number;
+  shouldShow: boolean; // Only show if ≥70% completion rate
+  message: string; // Positive, non-comparative framing
+  recentComment?: {
+    userName: string;
+    userAvatar: string;
+    comment: string;
+  };
+}
+
 export interface Assignment {
   id: string;
   title: string;
@@ -38,4 +53,5 @@ export interface Assignment {
   imageUrl: string;
   dueDate?: string; // ISO date string
   detail: AssignmentDetail;
+  socialProof?: SocialProof;
 }
