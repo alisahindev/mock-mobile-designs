@@ -1,57 +1,73 @@
-import { Bell } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
-import { useAppState } from '../contexts/AppStateProvider';
+import * as React from 'react';
 
-type HeaderProps = {
-  userName: string;
-  avatarUrl?: string;
-};
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { useAppState } from '@/contexts/AppStateProvider';
+import { cn } from '@/lib/utils';
+import { Clock, Trophy } from 'lucide-react';
 
-export default function Header({ userName, avatarUrl }: HeaderProps) {
-  const { toggleDrawer, postConversation } = useAppState();
-  const { pathname } = useLocation();
-  const allowed =
-    pathname === '/' ||
-    pathname === '/completed' ||
-    pathname === '/progress' ||
-    (pathname === '/feedback' ? postConversation : false);
-  const avatarDisabled = !allowed;
+interface ProgressBadgeProps {
+  icon: React.ReactNode;
+  label: string;
+  className?: string;
+}
+
+function ProgressBadge({ icon, label, className }: ProgressBadgeProps) {
   return (
-    <header className='flex items-center justify-between px-4 pt-safe-8 pb-4' role='banner' aria-label='Üst bilgi'>
-      <div className='flex items-center gap-3 min-w-0'>
-        <button
-          type='button'
-          onClick={() => !avatarDisabled && toggleDrawer()}
-          disabled={avatarDisabled}
-          className='p-1 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#5F33E1] min-w-11 min-h-11'
-          aria-label='Profil ve ayarlar çekmecesini aç'
-          aria-disabled={avatarDisabled}
-        >
-          <img
-            src={avatarUrl || 'https://via.placeholder.com/46'}
-            alt='Kullanıcı avatarı'
-            width={46}
-            height={46}
-            className='w-[46px] h-[46px] rounded-full object-cover'
-          />
-        </button>
-        <div className='leading-tight truncate' aria-live='polite'>
-          <p className='text-sm text-foreground'>Hello!</p>
-          <p className='text-lg font-semibold text-foreground truncate'>{userName}</p>
+    <div
+      className={cn(
+        'flex items-center gap-1.5 rounded-full bg-background/80 px-3 py-1.5 text-xs font-medium shadow-sm',
+        className,
+      )}
+    >
+      {icon}
+      <span>{label}</span>
+    </div>
+  );
+}
+
+interface HeaderProps {
+  showProgressBadges?: boolean;
+  speakingTime?: string;
+  completionCount?: number;
+  streak?: number;
+  className?: string;
+}
+
+export function Header({ showProgressBadges = false, speakingTime, completionCount, streak, className }: HeaderProps) {
+  const { openDrawer, userProfile } = useAppState();
+
+  return (
+    <header className={cn('flex items-center justify-between px-4 py-3', className)}>
+      <Button variant='ghost' size='icon' onClick={openDrawer} className='rounded-full' aria-label='Profil menüsünü aç'>
+        <Avatar className='size-8'>
+          <AvatarImage src={userProfile.avatarUrl} alt={userProfile.name} />
+          <AvatarFallback>
+            {userProfile.name
+              .split(' ')
+              .map(n => n[0])
+              .join('')
+              .toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+      </Button>
+
+      {showProgressBadges && (
+        <div className='flex items-center gap-2'>
+          {speakingTime && <ProgressBadge icon={<Clock className='size-3.5' />} label={speakingTime} />}
+          {completionCount !== undefined && (
+            <ProgressBadge
+              icon={
+                <div className='flex items-center gap-0.5'>
+                  <Trophy className='size-3.5' />
+                  {streak && streak > 0 && <span className='text-[10px]'>🔥</span>}
+                </div>
+              }
+              label={completionCount.toString()}
+            />
+          )}
         </div>
-      </div>
-      <button
-        type='button'
-        className='relative p-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#5F33E1]'
-        aria-label='Bildirimler'
-      >
-        <Bell className='w-6 h-6 text-foreground fill-foreground' aria-hidden='true' />
-        <span
-          className='absolute -top-0.5 left-3 w-2 h-2 rounded-full'
-          style={{ backgroundColor: 'var(--primary)' }}
-          aria-hidden='true'
-        />
-      </button>
+      )}
     </header>
   );
 }

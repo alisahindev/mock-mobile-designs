@@ -4,15 +4,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import { AppStateProvider } from './contexts/AppStateProvider';
 import './index.css';
-import AddProject from './pages/AddProject';
-import AssignmentDetail from './pages/AssignmentDetail';
-import Completed from './pages/Completed';
-import Conversation from './pages/Conversation';
-import Feedback from './pages/Feedback';
-import Home from './pages/Home';
-import Progress from './pages/Progress';
-import Replay from './pages/Replay';
-import Success from './pages/Success';
+import AssignmentDetail from './pages/AssignmentDetail.tsx';
+import Completed from './pages/Completed.tsx';
+import CompletedDetail from './pages/CompletedDetail.tsx';
+import Conversation from './pages/Conversation.tsx';
+import Feedback from './pages/Feedback.tsx';
+import Home from './pages/Home.tsx';
+import Progress from './pages/Progress.tsx';
+import Replay from './pages/Replay.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,14 +19,13 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'assignment/:id', element: <AssignmentDetail /> },
       { path: 'completed', element: <Completed /> },
       { path: 'progress', element: <Progress /> },
-      { path: 'conversation', element: <Conversation /> },
-      { path: 'feedback', element: <Feedback /> },
-      { path: 'replay', element: <Replay /> },
-      { path: 'add-project', element: <AddProject /> },
-      { path: 'success', element: <Success /> },
+      { path: 'assignments/:id', element: <AssignmentDetail /> },
+      { path: 'conversation/:id', element: <Conversation /> },
+      { path: 'feedback/:id', element: <Feedback /> },
+      { path: 'replay/:id', element: <Replay /> },
+      { path: 'completed/:id', element: <CompletedDetail /> },
     ],
   },
 ]);
@@ -63,11 +61,9 @@ const AppWithStatusBar = () => {
   }, []);
 
   return (
-    <div className='app-radial-bg'>
-      <AppStateProvider>
-        <RouterProvider router={router} />
-      </AppStateProvider>
-    </div>
+    <AppStateProvider>
+      <RouterProvider router={router} />
+    </AppStateProvider>
   );
 };
 

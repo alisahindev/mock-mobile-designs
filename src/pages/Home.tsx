@@ -1,37 +1,73 @@
-import { useNavigate } from 'react-router-dom';
-import AssignmentCard from '../components/AssignmentCard';
-import Header from '../components/Header';
-import { mockAssignments } from '../data/assignments';
+import { AssignmentCard } from '@/components/AssignmentCard';
+import { BottomNav } from '@/components/BottomNav';
+import { Drawer } from '@/components/Drawer';
+import { EmptyState } from '@/components/EmptyState';
+import { Header } from '@/components/Header';
+import { SectionHeader } from '@/components/SectionHeader';
+import { getAssignmentsByStatus } from '@/data/assignments';
+import { useProgressData } from '@/hooks/useProgressData';
 
-export default function Home() {
-  const navigate = useNavigate();
-  const activeAssignments = mockAssignments.filter(a => a.status !== 'completed').slice(0, 3);
+export default function HomePage() {
+  const activeAssignments = getAssignmentsByStatus('not_started');
+  const inProgressAssignments = getAssignmentsByStatus('in_progress');
+  const progressData = useProgressData();
+
+  const formatSpeakingTime = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    if (hours > 0) {
+      return `${hours} sa ${mins} dk`;
+    }
+    return `${mins} dk`;
+  };
 
   return (
-    <div>
-      <Header userName='Livia Vaccaro' avatarUrl='https://avatar.iran.liara.run/public/41' />
+    <div className='flex min-h-screen flex-col pb-20'>
+      <Header
+        showProgressBadges
+        speakingTime={formatSpeakingTime(progressData.totalSpeakingTime)}
+        completionCount={progressData.completedConversations}
+        streak={progressData.completedConversations >= 3 ? progressData.completedConversations : undefined}
+      />
 
-      {/* Today's Assignments Section */}
-      <section className='px-6 mb-6' aria-labelledby='assignments-title'>
-        <div className='space-y-3' role='list' aria-label='Görev listesi'>
-          {activeAssignments.map(assignment => (
-            <AssignmentCard
-              key={assignment.id}
-              assignment={assignment}
-              onClick={() => navigate(`/assignment/${assignment.id}`)}
-              userProfile={{
-                age: 15, // Default age for demo
-                hasSocialAnxiety: false,
-                isPerfectionist: false,
-                isFromCompetitiveEnvironment: false,
-                isLowerPerforming: false,
-              }}
-            />
-          ))}
-        </div>
-      </section>
+      <div className='flex-1 space-y-6'>
+        {/* Devam Eden Ödevler */}
+        {inProgressAssignments.length > 0 && (
+          <div>
+            <SectionHeader title='Devam Eden Ödevler' />
+            <div className='px-4 space-y-4'>
+              {inProgressAssignments.map(assignment => (
+                <AssignmentCard
+                  key={assignment.id}
+                  assignment={assignment}
+                  showSocialProof={assignment.socialProof?.shouldShow}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
-      <div className='h-24' aria-hidden='true' />
+        {/* Aktif Ödevler */}
+        {activeAssignments.length > 0 ? (
+          <div>
+            <SectionHeader title='Aktif Ödevler' />
+            <div className='px-4 space-y-4'>
+              {activeAssignments.map(assignment => (
+                <AssignmentCard
+                  key={assignment.id}
+                  assignment={assignment}
+                  showSocialProof={assignment.socialProof?.shouldShow}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <EmptyState icon='📝' title='Henüz aktif ödev yok' description='Yeni ödevler yakında eklenecek' />
+        )}
+      </div>
+
+      <BottomNav />
+      <Drawer />
     </div>
   );
 }

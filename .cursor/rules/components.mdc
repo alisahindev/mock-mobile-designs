@@ -1,0 +1,205 @@
+---
+alwaysApply: true
+---
+
+Genel Navigasyon Bileşenleri
+
+Alt Sekme Navigasyon Çubuğu (Bottom Tab Navigation Bar): Uygulamanın ana bölümleri arasında geçiş yapmak için ekranın altında kalıcı olarak bulunan çubuk.
+
+Sekme Öğeleri (Tab Items): Genellikle 3 adet (Ana Sayfa, Tamamlananlar, İlerleme). Her sekme bir ikon ve etiket içerir. Aktif sekme görsel olarak belirtilir (örn. kalın etiket, farklı renk).
+
+Profil Çekmecesi Tetikleyicisi (Avatar İkonu): Genellikle sol üst köşede bulunur, dokunulduğunda Profil Çekmecesini açar.
+
+Profil Çekmecesi (Profile Drawer): Soldan kayarak açılan menü.
+
+Kapatma Düğmesi (Close Button): Çekmecenin sağ üst köşesinde bulunur.
+
+Öğrenci Bilgi Alanı: Avatar, öğrenci adı, sınıf/derece bilgisi içerir.
+
+Okul Bağlam Alanı: Okul adı, öğretmen adı, sınıf adı gibi bilgileri listeler.
+
+Ayarlar Bölümü: Ayarlar başlığı ve ilgili ayar seçeneklerini içerir.
+
+Metin Boyutu Ayarı Satırı: "Aa Metin Boyutu" etiketi ve yönlendirme ikonu (›) içerir, dokunulduğunda metin boyutu seçici modalını açar.
+
+Karanlık Mod Ayarı Satırı: "🌓 Karanlık Mod" etiketi ve açma/kapama anahtarı (toggle switch) içerir.
+
+Yardım Satırı: "❓ Yardım" etiketi içerir, dokunulduğunda yardım ekranını açar.
+
+Çıkış Satırı: "🚪 Çıkış" etiketi içerir (genellikle kırmızı renkte), dokunulduğunda onay iletişim kutusu açar.
+
+Ayırıcı Çizgiler (Dividers): Bölümler arasında görsel ayrım sağlar.
+
+Geri Ok Düğmesi (Back Arrow Button): Detay ekranlarının sol üst köşesinde bulunur, önceki ekrana dönmeyi sağlar.
+
+Ekran 1: Ana Sayfa - Ödev Listesi (Home - Assignment List)
+
+Başlık Çubuğu (Header): Sol üstte Avatar İkonu, sağ üstte İlerleme Rozetleri bulunur.
+
+İlerleme Rozetleri (Progress Badges): Konuşma Süresi Rozeti (saat ikonu + süre) ve Tamamlama/Seri Rozeti (kupa ikonu + sayı, seri varsa alev ikonu).
+
+Bölüm Başlığı (Section Header): "Aktif Ödevler" gibi başlıklar.
+
+Devam Eden Ödev Kartı (In-Progress Assignment Card): Listenin en üstünde, farklı bir kenarlık veya arka plan rengi ile vurgulanmış kart.
+
+Senaryo Resmi Katmanı (Scenario Image Overlay): Kart arka planı.
+
+Başlık (Title).
+
+Öğrenme Hedefi (Learning Objective): İkon (📝) ve metin içerir.
+
+Meta Veri Rozetleri (Metadata Badges): Kategori (🏷️) ve teslim tarihi gibi bilgiler içerir.
+
+"Devam Ediyor" Rozeti (In Progress Badge): Sol üstte hap şeklinde rozet.
+
+İlerleme Halkası (Progress Ring): Sağ üst köşede, yüzdesiz görsel ilerleme göstergesi.
+
+Sosyal Kanıt Mesajı (Social Proof Message): Koşullu olarak gösterilir (örn. "Sınıf arkadaşlarının çoğu tamamladı!"). Sadece ilk kartta bulunur.
+
+Aktif Ödev Kartı (Active Assignment Card): Standart ödev kartı.
+
+Senaryo Resmi Katmanı (Scenario Image Overlay).
+
+Başlık (Title).
+
+Öğrenme Hedefi (Learning Objective).
+
+Meta Veri Rozetleri (Metadata Badges).
+
+Boş Durum Göstergesi (Empty State): Ödev olmadığında gösterilen illüstrasyon ve metin.
+
+Ekran 2: Senaryo Detayı - Konuşma Öncesi Hazırlık (Scenario Detail - Pre-Conversation Prep)
+
+Başlık Çubuğu (Header): Sol üstte Geri Ok Düğmesi içerir.
+
+Ana Senaryo Resmi (Hero Image): Ekranın üst kısmında tam genişlikte resim.
+
+Başlık (Title).
+
+Meta Veri Satırı: Öğrenme Hedefi (📝), Kategori Rozeti (🏷️), Süre (⏱️) ikonları ve metinleri içerir.
+
+Akordiyon Bölümleri (Accordion Sections): Varsayılan olarak kapalı, dokunulduğunda açılan/kapanan bölümler.
+
+Akordiyon Başlığı: Metin ve genişletme/daraltma ikonu (örn. ⏷/⏶) içerir.
+
+Ortam Akordiyonu (Setting Accordion).
+
+Rolünüz Akordiyonu (Your Role Accordion): İkon (👤) ve metin içerir.
+
+AI Rolü Akordiyonu (AI Role Accordion): İkon (🤖) ve metin içerir.
+
+Yardımcı İfadeler Akordiyonu (Helpful Phrases Accordion): Varsayılan olarak açık olabilir. İfadeleri ve ses çalma düğmelerini (▶) listeler. İsteğe bağlı 'shadowing' için araç ipucu (💡) içerebilir.
+
+Başlatma/Devam Etme Düğmesi (Start/Resume Conversation Button): Ekranın altında sabitlenmiş ana eylem düğmesi.
+
+Ekran 3: Sürükleyici Konuşma (Immersive Conversation)
+
+Çıkış Düğmesi (Exit Button): Sol üst köşede 'X' ikonu.
+
+Konuşma Göstergesi Animasyon Alanı (Speaking Indicator Animation Area): Üst kısımda, kimin konuştuğunu veya dinleme durumunu gösteren animasyon (örn. dalga formu).
+
+Transkripsiyon Alanı (Transcription Area): Ortada, kaydırılabilir alanda AI ve öğrenci transkriptlerini gösterir.
+
+AI Metni: Daha büyük, ortalanmış, belirgin.
+
+Öğrenci Metni: Daha küçük, sönük, geçici.
+
+Mikrofon Açma/Kapama Düğmesi (Microphone Toggle Button): Alt ortada, büyük dairesel düğme (IDLE/OFF ⭕, ACTIVE/ON ⚫, AUTO-DISABLED ⭕ Gri durumları).
+
+İpucu Düğmesi (Hint Button): Mikrofon düğmesinin yanında, koşullu olarak belirir (? veya 💡 ikonu).
+
+Zaman Uyarısı Katmanları (Time Warning Overlays): Modal olmayan, geçici metin uyarıları (örn. "Sohbeti bitiriyoruz...").
+
+Ekran 4: Konuşma Sonrası Geri Bildirim (Post-Conversation Feedback)
+
+Sabit Kutlama Başlığı (Fixed Celebration Header): Üstte sabit, kaydırılamaz alan.
+
+Kupa İkonu (Trophy Icon) ve Kutlama Mesajı.
+
+Dokunulabilir Metrik Satırları: İkon (örn. 🕒, ✓) ve metin ("X dk Y sn konuştun", "Z hedefi tamamladın") içerir. Dokunulduğunda kümülatif toplamı gösteren araç ipucu açılır.
+
+Kaydırılabilir İçerik Alanı (Scrollable Content Area):
+
+Bölüm Başlığı: "📚 Pratik Yapılacaklar".
+
+Gelişim Kartları (Improvement Cards): 3-4 adet kart.
+
+"Şunu dedin:" metni ve öğrencinin ifadesi.
+
+"✏️ Şunu dene:" metni ve düzeltilmiş ifade.
+
+Ses Çalma Düğmesi (Play Audio Button): Düzeltilmiş ifadenin sesini çalar.
+
+Pratik Düğmesi (Practice Button): İsteğe bağlı Azure Telaffuz Değerlendirmesini başlatır (sadece İngilizce).
+
+Güven Girişi İstemcisi (Confidence Check): "Ne kadar güvende hissediyorsun?" sorusu ve 3 emoji ölçeği (😟 😐 😊) ile etiketleri.
+
+Sabit Alt Eylem Çubuğu (Fixed Bottom CTA Bar): Yan yana iki düğme içerir.
+
+Tekrar Oynat Düğmesi (Replay Button): "🔄 Tekrar Oynat".
+
+Bitti Düğmesi (Done Button): "✓ Bitti".
+
+Ekran 5: İlerleme Sekmesi (Progress Tab)
+
+Başlık Çubuğu (Header): Sol üstte Avatar İkonu (profil çekmecesini açar).
+
+Sayfa Başlığı: "İlerlemen".
+
+Sabit Üst Rozet (Fixed Top Badge): Birleştirilmiş Tamamlama/Seri rozeti (Kupa 🏆 + Alev 🔥), tamamlanan sayı ve kutlama mesajı içerir.
+
+Konuşma Süresi Akordiyonu (Speaking Time Accordion): Başlıkta ikon (🕒), özet ("X sa Y dk – bu hafta Z dk arttı!") ve genişletme ikonu (⏷/⏶) bulunur. Genişletildiğinde grafik ve detaylı metin gösterir.
+
+Konuşma Güveni Akordiyonu (Speaking Confidence Accordion): Başlıkta ikon (💪), trend özeti ("Düzenli olarak artıyor") ve genişletme ikonu bulunur. Genişletildiğinde grafik ve içgörüler gösterir.
+
+Görev Başarımı Akordiyonu (Task Achievement Accordion): Başlıkta ikon (✓), ortalama ("Ort: Z hedef/oturum") ve genişletme ikonu bulunur. Genişletildiğinde grafik ve son başarıların listesini (senaryo başlığı + öğrenme hedefi) gösterir.
+
+Ekran 7: Konuşmayı Tekrar Oynat (Replay Conversation)
+
+Başlık Çubuğu (Header): Kapatma Düğmesi (✕) ve başlık ("Konuşma Tekrarı") içerir.
+
+İlerleme Çubuğu (Progress Bar): Konuşma zaman çizgisindeki konumu gösteren görsel çubuk (etkileşimli değil) ve süre göstergesi (örn. "2:15 / 6:23").
+
+Sohbet Arayüzü (Chat Interface): Kaydırılabilir alanda mesaj balonları.
+
+AI Mesaj Balonu: Sola hizalı, gri arka planlı. Yanında Çeviri (🌐) ve Ses Çalma (▶) ikonları bulunur.
+
+Öğrenci Mesaj Balonu: Sağa hizalı, marka rengi arka planlı. Yanında Ses Çalma (▶) ikonu bulunur.
+
+Çeviri Alanı (Translation Area): AI mesajının altında, koşullu olarak gösterilen çeviri metni.
+
+Ekran 8: Tamamlanmış Senaryolar Listesi (Completed Scenarios List)
+
+Başlık Çubuğu (Header): Sol üstte Avatar İkonu.
+
+Sayfa Başlığı: "Tamamlananlar".
+
+Tamamlanmış Senaryo Kartları (Completed Scenario Cards): Dikey kaydırılabilir liste.
+
+Senaryo Resmi Katmanı (Scenario Image Overlay).
+
+Başlık (Title).
+
+Meta Veri Rozetleri: Tarih (📅) ve Kategori (🏷️).
+
+Konuşma Süresi Halkası (Speaking Time Ring): Sağ üst köşede, yüzdesiz görsel halka. Dokunulduğunda süreyi gösteren araç ipucu açılır.
+
+Boş Durum Göstergesi (Empty State): Tamamlanmış ödev olmadığında gösterilir.
+
+Ekran 9: Tamamlanmış Senaryo Detay Ekranı (Completed Scenario Detail View)
+
+Başlık Çubuğu (Header): Sol üstte Geri Ok Düğmesi.
+
+Ana Senaryo Resmi (Hero Image).
+
+Başlık (Title).
+
+Kutlama Başlığı ve Metrikler (Celebration Header with Metrics): Geçmiş zaman kipiyle kutlama mesajı ve statik metrik satırları (Konuşma Süresi 🕒, Ulaşılan Hedefler ✓) içerir.
+
+Senaryo Detayları Akordiyonu (Scenario Details Accordion): Ortam, Rolünüz, AI Rolü gibi alt bölümleri içerir.
+
+İnceleme & Pratik Akordiyonu (Review & Practice Accordion): "Gelişimleriniz" (düzeltilmiş ifadeler ve ses çalma düğmesi içerir, Azure pratiği YOK) ve "Yardımcı İfadeler" (ses çalma düğmeli ifadeler) alt bölümlerini içerir.
+
+Konuşma Güveni Göstergesi (Speaking Confidence Display): Koşullu olarak, geçmiş güven derecelendirmesini (örn. 😊 Harika! güvende) gösterir (statik, etkileşimli değil).
+
+Konuşmamı Tekrar Oynat Düğmesi (Replay My Conversation Button): Konuşma tekrar oynatma ekranını (Ekran 7) açar.
