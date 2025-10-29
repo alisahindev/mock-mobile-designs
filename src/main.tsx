@@ -12,6 +12,15 @@ import Feedback from './pages/Feedback.tsx';
 import Home from './pages/Home.tsx';
 import Progress from './pages/Progress.tsx';
 import Replay from './pages/Replay.tsx';
+import * as Variant from './pages/variants';
+
+const variantRoutes = Object.keys(Variant).map(key => {
+  const ScreenComponent = Variant[key as keyof typeof Variant];
+  return {
+    path: `variants/${key.toLowerCase()}`,
+    element: <ScreenComponent />,
+  };
+});
 
 const router = createBrowserRouter([
   {
@@ -26,6 +35,7 @@ const router = createBrowserRouter([
       { path: 'feedback/:id', element: <Feedback /> },
       { path: 'replay/:id', element: <Replay /> },
       { path: 'completed/:id', element: <CompletedDetail /> },
+      ...variantRoutes,
     ],
   },
 ]);

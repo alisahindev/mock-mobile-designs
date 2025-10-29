@@ -68,6 +68,16 @@ export default function HomePage() {
 
       <BottomNav />
       <Drawer />
+      <div className='p-4'>
+        <h2 className='text-lg font-bold mb-2'>Screen Variants</h2>
+        <div className='grid grid-cols-3 gap-2'>
+          {Array.from({ length: 18 }, (_, i) => i + 1).map(i => (
+            <a key={i} href={`/variants/screen${i}`} className='p-2 bg-gray-200 rounded text-center'>
+              Screen {i}
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
